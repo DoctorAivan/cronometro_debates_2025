@@ -8,7 +8,7 @@
 //  Order of the object
     let candidates_order = 'DESC';
 
-    const SERVER_WEBSOCKET = 'ws://localhost:5000'
+    const SERVER_WEBSOCKET = 'ws://10.81.128.108:5000'
 
 //  Candidates Object
     const candidates = [

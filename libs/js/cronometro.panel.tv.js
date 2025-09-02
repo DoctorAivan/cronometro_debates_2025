@@ -22,37 +22,14 @@
         //  Set clock Limit
             clock_limit = data.timelimit;
 
-        //  Just run one time
-            if(!init_status)
-            {
-            //  Change status
-                init_status = true
+        //  Status clocks
+            init_status = 'on'
 
-            //  Get init configs
-                Crono.init_set( data );
+        //  Max time
+            time_max =  data.timelimit
 
-            //  Init clocks history
-                Crono.init_clocks( data.clocks )
-            }
-        });
-        
-    //  Event Status
-        socket.on('status', function(data)
-        {
-        //  Render object
-            const render = document.getElementById("render");
-
-        //  Validate status of render view
-            if(data == 'on')
-            {
-                render.classList.remove('status-off')
-                render.classList.add('status-on')
-            }
-            else
-            {
-                render.classList.remove('status-on')
-                render.classList.add('status-off')
-            }
+        //  Init clocks history
+            Crono.init_clocks( data.clocks )
         });
 
     //  -       -       -       -       -       -       -       -       -       -
@@ -193,35 +170,10 @@
                 render.appendChild(objeto);
             });
 
-        //  Sort candidates
-            Crono.order('AZ');
+            Crono.order()
 
         //  Init time for update position
             timer_order = setInterval(() => { Crono.order() } , time_interval );
-        },
-
-    //  Init App
-        init_set : function( data )
-        {
-        //  Max time
-            time_max =  data.timelimit
-
-        //  Render object
-            const render = document.getElementById("panel-candidates-list");
-
-            if(data.status == 'on')
-            {
-                render.classList.remove('status-off')
-                render.classList.add('status-on')
-            }
-            else
-            {
-                render.classList.remove('status-on')
-                render.classList.add('status-off')
-            }
-
-        //  Order of the objects
-            candidates_order = data.order;
         },
 
     //  Init clocks history

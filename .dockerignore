@@ -10,7 +10,6 @@ __pycache__/
 .env
 .vscode/
 .idea/
-.gitignore
 .venv/
 
 # Ignorar archivos locales temporales

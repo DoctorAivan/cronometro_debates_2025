@@ -25,18 +25,14 @@
         //  Set clock Limit
             clock_limit = data.timelimit;
 
-        //  Just run one time
-            if(!init_status)
-            {
-            //  Change status
-                init_status = true
+        //  Status clocks
+            init_status = data.status;
 
-            //  Get init configs
-                Crono.init_set( data );
+        //  Get init configs
+            Crono.init_set( data );
 
-            //  Init clocks history
-                Crono.init_clocks( data.clocks )
-            }
+        //  Init clocks history
+            Crono.init_clocks( data.clocks )
         });
 
     //  Event Set Order
@@ -386,25 +382,32 @@
     //  Set status of view
         set_status : function ( status )
         {
-            const buttom_on = document.getElementById('status-on');
-            const buttom_off = document.getElementById('status-off');
-
-            if( status == 'on' )
+            if( init_status != status )
             {
-                buttom_on.classList.remove('off');
-                buttom_on.classList.add('on');
-                buttom_off.classList.remove('on');
-                buttom_off.classList.add('off');
-            }
-            else
-            {
-                buttom_on.classList.remove('on');
-                buttom_on.classList.add('off');
-                buttom_off.classList.remove('off');
-                buttom_off.classList.add('on');
-            }
+                const buttom_on = document.getElementById('status-on');
+                const buttom_off = document.getElementById('status-off');
 
-            socket.emit( 'status' , status );
+                if( status == 'on' )
+                {
+                    buttom_on.classList.remove('off');
+                    buttom_on.classList.add('on');
+                    buttom_off.classList.remove('on');
+                    buttom_off.classList.add('off');
+
+                    init_status = 'on'
+                }
+                else
+                {
+                    buttom_on.classList.remove('on');
+                    buttom_on.classList.add('off');
+                    buttom_off.classList.remove('off');
+                    buttom_off.classList.add('on');
+
+                    init_status = 'off'
+                }
+
+                socket.emit( 'status' , status );
+            }
         },
 
     //  Set order of elements

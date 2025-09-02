@@ -38,7 +38,7 @@ clock = {}
 
 # APP Settings
 CLOCKS = 8
-TIMELIMIT = 60
+TIMELIMIT = 180
 ORDER = "DESC"
 STATUS = "on"
 
@@ -71,14 +71,12 @@ class Clock:
                     self.is_playing = False
                     self.is_paused = True
                     self.sio.emit("pause_single", {"id": self.id})
-                    print("pause_single", self.id, self.elapsed_time)
 
                 else:
                     self.elapsed_time += now - self.last_time
                     self.is_playing = True
                     self.is_paused = False
                     self.sio.emit("elapsed", {"id": self.id, "elapsed": self.elapsed_time})
-                    print("elapsed", self.id, self.elapsed_time)
 
                 self.last_time = now
 

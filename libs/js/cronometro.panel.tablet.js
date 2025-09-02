@@ -25,43 +25,20 @@
         //  Set clock Limit
             clock_limit = data.timelimit;
 
-        //  Just run one time
-            if(!init_status)
-            {
-            //  Change status
-                init_status = true
+        //  Status clocks
+            init_status = data.status;
 
-            //  Get init configs
-                Crono.init_set( data );
+        //  Max time
+            time_max =  data.timelimit;
 
-            //  Init clocks history
-                Crono.init_clocks( data.clocks )
-            }
+        //  Init clocks history
+            Crono.init_clocks( data.clocks )
         });
 
     //  Event Set Order
         socket.on('order', function(data)
         {
             Crono.order(data);
-        });
-
-    //  Event Status
-        socket.on('status', function(data)
-        {
-        //  Render object
-            const render = document.getElementById("panel-candidates-list");
-
-        //  Validate status of render view
-            if(data == 'on')
-            {
-                render.classList.remove('status-off')
-                render.classList.add('status-on')
-            }
-            else
-            {
-                render.classList.remove('status-on')
-                render.classList.add('status-off')
-            }
         });
 
     //  -       -       -       -       -       -       -       -       -       -
@@ -207,31 +184,6 @@
 
         //  Init time for update position
             timer_order = setInterval(() => { Crono.order() } , time_interval );
-        },
-
-    //  Init App
-        init_set : function( data )
-        {
-        //  Set new time limit
-            time_max =  data.timelimit
-        
-        //  Render object
-            const render = document.getElementById("panel-candidates-list");
-
-        //  Change UI status
-            if(data.status == 'on')
-            {
-                render.classList.remove('status-off')
-                render.classList.add('status-on')
-            }
-            else
-            {
-                render.classList.remove('status-on')
-                render.classList.add('status-off')
-            }
-
-        //  Order of the object
-            candidates_order = data.order;
         },
 
     //  Init clocks history

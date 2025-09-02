@@ -22,18 +22,17 @@
         //  Set clock Limit
             clock_limit = data.timelimit;
 
-        //  Just run one time
-            if(!init_status)
-            {
-            //  Change status
-                init_status = true
+        //  Status clocks
+            init_status = data.status;
 
-            //  Get init configs
-                Crono.init_set( data );
+        //  Max time
+            time_max =  data.timelimit
 
-            //  Init clocks history
-                Crono.init_clocks( data.clocks )
-            }
+        //  Get init configs
+            Crono.init_set( data );
+
+        //  Init clocks history
+            Crono.init_clocks( data.clocks )
         });
 
     //  Event Set Order
@@ -209,9 +208,6 @@
     //  Init App
         init_set : function( data )
         {
-        //  Max time
-            time_max =  data.timelimit
-
         //  Render object
             const render = document.getElementById("render");
 

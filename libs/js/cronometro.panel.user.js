@@ -38,18 +38,14 @@
         //  Set clock Limit
             clock_limit = data.timelimit;
 
-        //  Just run one time
-            if(!init_status)
-            {
-            //  Change status
-                init_status = true
+        //  Status clocks
+            init_status = "on"
 
-            //  Get candidate data
-                Crono.init_set(data);
+        //  Max time
+            time_max =  data.timelimit;
 
-            //  Init clocks history
-                Crono.init_clocks( data.clocks )
-            }
+        //  Init clocks history
+            Crono.init_clocks( data.clocks )
         });
     
     //  -       -       -       -       -       -       -       -       -       -
@@ -217,28 +213,6 @@
             }
         },
 
-    //  Init App
-        init_set : function( data )
-        {
-        //  Max time
-            time_max =  data.timelimit;
-
-        //  Render object
-            const render = document.getElementById("panel-candidates-list");
-
-        //  Change UI status
-            if(data.status == 'on')
-            {
-                render.classList.remove('status-off')
-                render.classList.add('status-on')
-            }
-            else
-            {
-                render.classList.remove('status-on')
-                render.classList.add('status-off')
-            }
-        },
-
     //  Init clocks history
         init_clocks : function ( data )
         {
@@ -376,20 +350,24 @@
         //  Play set socket
             set_play : function ()
             {
+                // Get candidate data
                 let candidate = candidates.find(candidate => candidate.id == object_id);
-                candidate.timer = true;
 
-                Crono.play();
-                Crono.status();
+                // Validate clock status
+                if( candidate.timer == false )
+                {
+                    candidate.timer = true;
 
-                socket.emit( 'fn_play_single' , object_id );
+                    Crono.play();
+                    Crono.status();
+
+                    socket.emit( 'fn_play_single' , object_id );
+                }
             },
 
     //  Pause set UI DOM
         pause : function ()
         {
-            console.log("PAUSE ACTION");
-            
         //  Remove item selected
             document.querySelectorAll('#status > div').forEach(function( item )
             {
@@ -406,13 +384,19 @@
         //  Pause set socket
             set_pause : function ()
             {
+                // Get candidate data
                 let candidate = candidates.find(candidate => candidate.id == object_id);
-                candidate.timer = false;
 
-                Crono.pause();
-                Crono.status();
+                // Validate clock status
+                if( candidate.timer == true )
+                {
+                    candidate.timer = false;
 
-                socket.emit( 'fn_pause_single' , object_id );
+                    Crono.pause();
+                    Crono.status();
+
+                    socket.emit( 'fn_pause_single' , object_id );
+                }
             },
 
     //  Open modal reset action

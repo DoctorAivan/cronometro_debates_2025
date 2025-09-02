@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+	<meta charset='utf-8'>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<title>Cronometro Debates</title>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@100;300;400;500;700&display=swap">
+	<link rel='stylesheet' href='libs/css/cronometro.panel.tv.css'>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src='libs/js/cronometro.config.js'></script>
+    <script type="text/javascript" src='libs/js/cronometro.panel.tv.js'></script>
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+</head>
+
+<body>
+
+    <div id="panel">
+        <noscript>
+        <header>
+            <div>
+                <i class="fas fa-stopwatch"></i>
+            </div>
+            <div>
+                <h2>CRONÓMETROS CHV</h2>
+            </div>
+        </header>
+        </noscript>
+        <section id="panel-candidates">
+            <div id="panel-candidates-list"></div>
+        </section>
+    </div>
+
+    <script type="text/javascript">
+
+        Crono.init();
+    
+    </script>
+
+</body>
+</html>

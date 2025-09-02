@@ -1,0 +1,24 @@
+# Ignorar archivos de Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignorar logs
+*.log
+
+# Ignorar directorios de desarrollo
+.env
+.vscode/
+.idea/
+.gitignore
+.venv/
+
+# Ignorar archivos locales temporales
+*.swp
+*.bak
+server.js
+package.json
+intructivo.txt
+
+# Ignorar dependencias instaladas localmente
+venv/

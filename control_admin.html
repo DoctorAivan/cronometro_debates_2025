@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+	<meta charset='utf-8'>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<title>Cronometro Debates</title>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@100;300;400;500;700&display=swap">
+	<link rel='stylesheet' href='libs/css/cronometro.panel.css'>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src='libs/js/cronometro.config.js'></script>
+    <script type="text/javascript" src='libs/js/cronometro.panel.js'></script>
+    <script type="text/javascript" src='libs/js/cronometro.modal.js'></script>
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <style type="text/css">
+
+        #panel
+        {
+            position: absolute;
+            height: 1120px;
+            top: calc(50% - 560px) !important;
+            margin: 2rem 0 2rem 0 !important;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="modal" id="modal-time-limit">
+        <div class="modal-content">
+            <div class="modal-content-close" onclick="Modal.close();">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="modal-content-header">
+                <h2><i class="fas fa-exclamation-circle"></i> Asignar tiempo limite</h2>
+            </div>
+            <div class="modal-content-content">
+                <p>Cambiarás el tiempo maximo de todos los cronometros a <span id="set-time-value"></span> , esto reiniciará todos los relojes inmediatamente por lo que debes confirmar esta operación.</p>
+            </div>
+            <div class="modal-content-footer">
+                <div onclick="Crono.set_time_limit_confirm()" class="acept">CONFIRMAR</div>
+                <div onclick="Modal.close();" class="cancel">CANCELAR</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-reboot">
+        <div class="modal-content">
+            <div class="modal-content-close" onclick="Modal.close();">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="modal-content-header">
+                <h2><i class="fas fa-exclamation-circle"></i> Reiniciar los cronometros</h2>
+            </div>
+            <div class="modal-content-content">
+                <p>Todos los relojes serán detenidos y su tiempo será reiniciado a cero, por lo que debes confirmar esta operación.</p>
+            </div>
+            <div class="modal-content-footer">
+                <div onclick="Crono.set_reboot_confirm()" class="acept">CONFIRMAR</div>
+                <div onclick="Modal.close();" class="cancel">CANCELAR</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-pause-all">
+        <div class="modal-content">
+            <div class="modal-content-close" onclick="Modal.close();">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="modal-content-header">
+                <h2><i class="fas fa-exclamation-circle"></i> Pausar los cronometros</h2>
+            </div>
+            <div class="modal-content-content">
+                <p>Todos los relojes serán detenidos y concerbarán su tiempo actual, por lo que debes confirmar esta operación.</p>
+            </div>
+            <div class="modal-content-footer">
+                <div onclick="Crono.set_pause_all_confirm()" class="acept">CONFIRMAR</div>
+                <div onclick="Modal.close();" class="cancel">CANCELAR</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="panel">
+        <header>
+            <div>
+                <i class="fas fa-stopwatch"></i>
+            </div>
+            <div>
+                <h2>Cronometros Debates</h2>
+                <h3>Administración de los tiempos en pantalla</h3>
+            </div>
+            <div class="buttoms">
+                <i class="fas fa-cogs"></i>
+            </div>
+        </header>
+        <section id="panel-candidates">
+            <div>
+                <div id="panel-candidates-options">
+
+                    <div class="group">
+                        <div class="title">
+                            <h2><i class="fas fa-hourglass-start"></i> Intervención por candidato</h2>
+                            <h3>Tiempo maximo disponible por bloque</h3>
+                        </div>
+                        <div class="options" id="time-limit">
+                            <div onclick="Crono.set_time_limit('1')" id="time-limit-1" class="off">1 Min</div>
+                            <div onclick="Crono.set_time_limit('3')" id="time-limit-3" class="off">3 Min</div>
+                            <div onclick="Crono.set_time_limit('5')" id="time-limit-5" class="off">5 Min</div>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <div class="title">
+                            <h2><i class="fas fa-toggle-on"></i> Estado en pantalla</h2>
+                            <h3>Visualización del modulo en pantalla</h3>
+                        </div>
+                        <div class="options">
+                            <div onclick="Crono.set_status('on')" id="status-on" class="off"><i class="far fa-eye"></i> Visible</div>
+                            <div onclick="Crono.set_status('off')" id="status-off"class="off"><i class="far fa-eye-slash"></i> Oculto</div>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <div class="title">
+                            <h2><i class="fas fa-sort"></i> Orden de los cronometros</h2>
+                            <h3>Opciones de despliegue disponibles</h3>
+                        </div>
+                        <div class="options">
+                            <div onclick="Crono.set_order('DESC')" id="order-DESC" class="off"><i class="fas fa-sort-numeric-down"></i> descendente</div>
+                            <div onclick="Crono.set_order('ASC')" id="order-ASC"class="off"><i class="fas fa-sort-numeric-down-alt"></i> ascendente</div>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <div class="title">
+                            <h2><i class="fas fa-pause-circle"></i> Pausar los cronometros</h2>
+                            <h3>Todos los relojes serán detenidos en su tiempo</h3>
+                        </div>
+                        <div class="options">
+                            <div onclick="Crono.set_pause_all()" class="reset"><i class="fas fa-pause"></i> Pausar ahora</div>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <div class="title">
+                            <h2><i class="fas fa-history"></i> Reiniciar los cronometros</h2>
+                            <h3>Todos los relojes volveran al tiempo máximo</h3>
+                        </div>
+                        <div class="options">
+                            <div onclick="Crono.set_reboot()" class="reset"><i class="fas fa-step-backward"></i> reiniciar ahora</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div>
+                <div id="panel-candidates-list" style="height: 870px;">
+
+                </div>
+            </div>
+        </section>
+        <footer>
+            Cronómetros debate 2025 - Chilevisión
+        </footer>
+    </div>
+
+    <script type="text/javascript">
+
+        Crono.init();
+    
+    </script>
+
+</body>
+</html>

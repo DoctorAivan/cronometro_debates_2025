@@ -1,0 +1,17 @@
+FROM python:3.11-slim
+
+# Crear directorio de la app
+WORKDIR /app
+
+# Instalar dependencias
+COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir -r requirements.txt
+
+# Copiar código de la app
+COPY . .
+
+# Exponer puerto interno
+EXPOSE 5000
+
+# Comando de inicio con gunicorn + eventlet para WebSockets
+CMD ["gunicorn", "-c", "Dockerfile.gunicorn.py", "app:app"]

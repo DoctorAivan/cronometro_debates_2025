@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+	<meta charset='utf-8'>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<title>Cronometro Debates</title>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@100;300;400;500;700&display=swap">
+	<link rel='stylesheet' href='libs/css/cronometro.panel.css'>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src='libs/js/cronometro.config.js'></script>
+    <script type="text/javascript" src='libs/js/cronometro.panel.tablet.js'></script>
+    <script type="text/javascript" src='libs/js/cronometro.modal.js'></script>
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <style type="text/css">
+
+        #panel
+        {
+            position: relative;
+            width: 32rem;
+            top: 0;
+            margin: 30px 0 30px 0;
+            left: calc(50% - 16rem);
+        }
+            #panel-candidates
+            {
+                height: 870px;
+            }
+                #panel-candidates
+                {
+                    grid-template-columns: 1fr;
+                }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div id="panel">
+        <header>
+            <div>
+                <i class="fas fa-stopwatch"></i>
+            </div>
+            <div>
+                <h2>Cronometros Debates</h2>
+                <h3>Vitrina de los tiempos en pantalla</h3>
+            </div>
+        </header>
+        <section id="panel-candidates">
+            <div id="panel-candidates-list"></div>
+        </section>
+        <footer>
+            Cronómetros debate 2025 - Chilevisión
+        </footer>
+    </div>
+
+    <script type="text/javascript">
+
+        Crono.init();
+    
+    </script>
+
+</body>
+</html>

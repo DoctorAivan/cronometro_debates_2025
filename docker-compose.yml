@@ -1,0 +1,18 @@
+services:
+  flask-socket:
+    build:
+      context: .
+      dockerfile: Dockerfile.flask
+    container_name: flask_socket
+    ports:
+      - "5000:5000"
+    restart: always
+
+  webserver:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    container_name: webserver_static
+    ports:
+      - "80:80"
+    restart: always

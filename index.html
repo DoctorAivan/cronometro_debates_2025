@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title>Cronometro Debates</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@100;300;400;500;700&display=swap">
+    <link rel='stylesheet' href='libs/css/cronometro.panel.css'>
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <style type="text/css">
+        #panel {
+            position: absolute;
+            height: 47.4rem;
+            top: calc(50% - 26rem);
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="modal" id="modal-set-time">
+        <div class="modal-content">
+            <div class="modal-content-close" onclick="Modal.close();">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="modal-content-header">
+                <h2><i class="fas fa-exclamation-circle"></i> Modificar el cronometro</h2>
+            </div>
+            <div class="modal-content-content">
+                <p>El reloj comenzará desde los <span id="set-time-value"></span> por lo que debes confirmar esta
+                    operación.</p>
+            </div>
+            <div class="modal-content-footer">
+                <div onclick="Crono.set_time_confirm()" class="acept">CONFIRMAR</div>
+                <div onclick="Modal.close();" class="cancel">CANCELAR</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-reset">
+        <div class="modal-content">
+            <div class="modal-content-close" onclick="Modal.close();">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="modal-content-header">
+                <h2><i class="fas fa-exclamation-circle"></i> Reiniciar cronometro</h2>
+            </div>
+            <div class="modal-content-content">
+                <p>El valor del reloj volvera a cero, por lo que debes confirmar esta operación.</p>
+            </div>
+            <div class="modal-content-footer">
+                <div onclick="Crono.set_reset_confirm()" class="acept">CONFIRMAR</div>
+                <div onclick="Modal.close();" class="cancel">CANCELAR</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="panel" style="width: 460px;
+    left: calc(50% - 230px);">
+        <header>
+            <div>
+                <i class="fas fa-stopwatch"></i>
+            </div>
+            <div>
+                <h2>Cronometros CHV</h2>
+                <h3>Configuraciones principales de la APP</h3>
+            </div>
+        </header>
+        <section id="panel-candidates" style="grid-template-columns: 1fr; border-radius: 20px;
+        padding: 2.1rem 2.5rem 2.5rem 2.5rem;">
+            <div id="panel-candidates-options">
+
+                <div class="group">
+                    <div class="title">
+                        <h2><i class="fas fa-link"></i> Secciones de la aplicación</h2>
+                        <h3>URL de secciones disponibles para administración</h3>
+                    </div>
+                    <div>
+                        <div style="margin-top: 12px;">
+                            <a href="control_admin.html" target="_blank" style="color: black;">
+                                <i class="fas fa-cog" style="margin-right: 8px;"></i> CONTROL PRINCIPAL
+                            </a>
+                        </div>
+                        <div style="margin-top: 30px; display: grid; gap: 8px;">
+                            <div class="title" style="margin: 0 0 5px 0;">
+                                <h2><i class="fas fa-link"></i> Cronometros candidatos</h2>
+                                <h3>URLs de cada administrador de cronometro</h3>
+                            </div>
+                            <div>
+                                <a href="control_users.html#01" target="_blank" style="color: black;">
+                                    <i class="fas fa-user" style="margin-right: 8px;"></i> MARCO ENRÍQUEZ-O
+                                </a>
+                            </div>
+                            <div>
+                                <a href="control_users.html#02" target="_blank" style="color: black;">
+                                    <i class="fas fa-user" style="margin-right: 8px;"></i> JEANNETTE JARA
+                                </a>
+                            </div>
+                            <div>
+                                <a href="control_users.html#03" target="_blank" style="color: black;">
+                                    <i class="fas fa-user" style="margin-right: 8px;"></i> JOHANNES KAISER
+                                </a>
+                            </div>
+                            <div>
+                                <a href="control_users.html#04" target="_blank" style="color: black;">
+                                    <i class="fas fa-user" style="margin-right: 8px;"></i> JOSE ANTÓNIO KAST
+                                </a>
+                            </div>
+                            <div>
+                                <a href="control_users.html#05" target="_blank" style="color: black;">
+                                    <i class="fas fa-user" style="margin-right: 8px;"></i> EVELYN MATTHEI
+                                </a>
+                            </div>
+                            <div>
+                                <a href="control_users.html#06" target="_blank" style="color: black;">
+                                    <i class="fas fa-user" style="margin-right: 8px;"></i> HAROLD M-NICHOLLS
+                                </a>
+                            </div>
+                            <div>
+                                <a href="control_users.html#07" target="_blank" style="color: black;">
+                                    <i class="fas fa-user" style="margin-right: 8px;"></i> FRANCO PARISI
+                                </a>
+                            </div>
+                            <div>
+                                <a href="control_users.html#08" target="_blank" style="color: black;">
+                                    <i class="fas fa-user" style="margin-right: 8px;"></i> EDUARDO ARTÉS
+                                </a>
+                            </div>
+                        </div>
+                        <div class="title" style="margin: 30px 0 15px 0;">
+                            <h2><i class="fas fa-link"></i> Vistas de Render</h2>
+                            <h3>URL para asignar a las salidas de TV</h3>
+                        </div>
+                        <div>
+                            <a href="render_tv.html" target="_blank" style="color: black;">
+                                <i class="fas fa-tv" style="margin-right: 8px;"></i> RENDER TV
+                            </a>
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <a href="render_monitor.html" target="_blank" style="color: black;">
+                                <i class="fas fa-tv" style="margin-right: 8px;"></i> RENDER MONITOR
+                            </a>
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <a href="render_tablet.html" target="_blank" style="color: black;">
+                                <i class="fas fa-tv" style="margin-right: 8px;"></i> RENDER TABLET
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <footer>
+            Cronómetros debate 2025 - Chilevisión
+        </footer>
+    </div>
+
+</body>
+
+</html>

@@ -181,7 +181,7 @@
                 //  Candidate HTML body
                     objeto.innerHTML = `<div class="candidate-indicator"></div>
                                         <div class="candidate-poster">
-                                            <img src="../candidates/${candidate.image}.png" />
+                                            <img src="candidates/${candidate.image}.png" />
                                         </div>
                                         <div class="candidate-data">
                                             <div class="candidate-data-name">${candidate.name} <span>${candidate.last_name}</span></div>

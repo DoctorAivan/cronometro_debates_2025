@@ -72,7 +72,7 @@
     #panel
     {
         position: relative;
-        width: 54rem;
+        width: 56rem;
         margin: 2rem 0 2rem 0;
         left: calc(50% - 27.5rem);
         border-radius: 1rem;
@@ -151,7 +151,7 @@
             #panel-candidates
             {
                 display: grid;
-                grid-template-columns: 1fr 21rem;
+                grid-template-columns: 1fr 23rem;
                 grid-gap: 2rem;
 
                 padding: 2.5rem 3rem 2.5rem 3rem;

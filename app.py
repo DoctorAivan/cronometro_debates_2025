@@ -38,7 +38,7 @@ clock = {}
 
 # APP Settings
 CLOCKS = 8
-TIMELIMIT = 180
+TIMELIMIT = 120
 ORDER = "DESC"
 STATUS = "on"
 

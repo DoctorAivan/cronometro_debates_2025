@@ -29,11 +29,11 @@
     {
         --body-bg : #000;
 
-        --render-width : 388px;
+        --render-width : 394px;
         --render-bottom : 745px;
 
-        --render-left : 112px;
-        --render-hidden : -412px;
+        --render-left : 106px;
+        --render-hidden : -418px;
         --render-bg : #ededed;
 
         --candidate-incompleted-bg--bg-1 : #2a4084;
@@ -201,15 +201,23 @@
             {
                 opacity: 0 !important;
             }
+            .gray-scale .candidate-data-timer-bar
+            {
+                background: #ebedf2;
+            }
             .gray-scale .candidate-poster
             {
                 background: #e9eef6 !important;
             }
                 .gray-scale .candidate-poster img
                 {
-                    filter: contrast(95%) brightness(1);
+                    filter: contrast(90%) brightness(1.1);
                     opacity: 0.9;
                 }
+            .gray-scale .candidate-data-timer-value
+            {
+                color: var(--color-white-2);
+            }
 
         .incomplete
         {
@@ -220,6 +228,10 @@
             .incomplete .candidate-poster
             {
                 overflow: hidden;
+            }
+            .incomplete .candidate-data-timer-bar
+            {
+                background: var(--color-white-2);
             }
                 .incomplete .candidate-data-timer-bar-bg
                 {
@@ -243,28 +255,26 @@
             }
             .complete .candidate-data
             {
-                color: var(--color-white) !important;
-            }
-            .complete .candidate-data-timer-value
-            {
-                color: var(--color-red);
-                animation: animate-pulse 1.5s ease-in-out infinite;
+                color: var(--color-white-2) !important;
             }
             .complete .candidate-data-timer-bar
             {
-                /*
-                animation: animate-pulse-bg 1.5s ease-in-out infinite !important;
-                */
-                background: var(--color-red) !important;
+                background: var(--color-red);
+                animation: animate-pulse-bg 4s ease 1 forwards;
             }
                 .complete .candidate-data-timer-bar-bg
                 {
-                    background: linear-gradient( 0deg, #c20000 0%, #e00000 100%);
+                    background: linear-gradient( 0deg, var(--candidate-time-bar-bg-1) 0%, var(--candidate-time-bar-bg-2) 100%);
                 }
             .complete .candidate-indicator
             {
                 background: var(--candidate-time-bar-bg-end-1);
                 opacity: 1;
+            }
+            .complete .candidate-data-timer-value
+            {
+                color: var(--color-red);
+                animation: animate-pulse 4s ease 1;
             }
 
         .candidate
@@ -296,13 +306,13 @@
                 .candidate-poster img
                 {
                     display: block;
-                    margin-top: 3px;
+                    margin-top: 1px;
                     margin-left: -2px;
-                    width: calc( var(--candidate-height) + 16px );
-                    height: calc( var(--candidate-height) + 16px );
+                    width: calc( var(--candidate-height) + 17px );
+                    height: calc( var(--candidate-height) + 17px );
                     object-fit: cover;
                     transition: all 0.75s ease-in-out;
-                    filter: contrast(85%) brightness(1.1);
+                    filter: contrast(95%) brightness(1.2);
                 }
             .candidate-data
             {
@@ -318,6 +328,7 @@
                     line-height: 1.45rem;
                     font-weight: 400;
                     text-transform: uppercase;
+                    transition: all 0.5s ease;
                 }
                     .candidate-data-name span
                     {
@@ -338,15 +349,15 @@
                             border-radius: var(--candidate-bar-radius);
                             overflow: hidden;
                             margin: 6px 0 0 0;
-                            transition: all 0.75s ease-in-out;
-                            background: #ebedf2;
+                            transition: all 0.5s ease;
+                            background: var(--color-white-2);
                         }
                         .candidate-data-timer-bar-bg
                         {
                             width: 0%;
                             height: var(--candidate-bar-height);
                             box-shadow: 0 0 2.2rem rgba(0, 0, 0, 0.5);
-                            transition: width 1s linear;
+                            transition: all 1.25s ease;
                         }
                     .candidate-data-timer-value
                     {
@@ -355,7 +366,7 @@
                         font-size: 2.15rem;
                         line-height: 2.15rem;
                         letter-spacing: 0.1rem;
-                        transition: all 0.75s ease-in-out;
+                        transition: all 0.5s ease;
                     }
 
     @keyframes orden-1-kf { 1% { z-index: 7 } }
@@ -368,13 +379,19 @@
 
     @keyframes animate-pulse
 	{
-		0% { color: #ffffff; }
-		25% { color: var(--color-red); }
-		100% { color: #ffffff; }
+		0% { color: var(--color-white-2); }
+		20% { color: var(--color-red); }
+		40% { color: var(--color-white-2); }
+		60% { color: var(--color-red); }
+		80% { color: var(--color-white-2); }
+		100% { color: var(--color-red); }
 	}
     @keyframes animate-pulse-bg
 	{
-		0% { background: #ffffff !important; }
-		25% { background: var(--color-red) !important; }
-		100% { background: #ffffff !important; }
+		0% { background: var(--color-white-2); }
+		20% { background: var(--color-red); }
+		40% { background: var(--color-white-2); }
+		60% { background: var(--color-red); }
+		80% { background: var(--color-white-2); }
+		100% { background: var(--color-red); }
 	}

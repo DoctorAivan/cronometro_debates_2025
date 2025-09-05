@@ -450,13 +450,13 @@
             {
                 response = '1 Minuto';
             }
+            else if( id == 2 )
+            {
+                response = '2 Minutos';
+            }
             else if( id == 3 )
             {
                 response = '3 Minutos';
-            }
-            else if( id == 5 )
-            {
-                response = '5 Minutos';
             }
             else
             {
@@ -485,14 +485,10 @@
             //  Calculate new time limit
                 let time_limit = ( crono_time_limit * 60 );
                 socket.emit( 'fn_global_time' , time_limit );
-
-            //  Reboot all clocks
-            //  socket.emit('reboot');
                 
             //  Close Modal
                 Modal.close();
             },
-
 
     //  Open Modal with confirm
         set_reboot : function ()

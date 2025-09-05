@@ -203,7 +203,7 @@
             }
             .gray-scale .candidate-data-timer-bar
             {
-                background: #ebedf2;
+                background: var(--color-white-2);
             }
             .gray-scale .candidate-poster
             {
@@ -231,7 +231,7 @@
             }
             .incomplete .candidate-data-timer-bar
             {
-                background: var(--color-white-2);
+                
             }
                 .incomplete .candidate-data-timer-bar-bg
                 {
@@ -260,7 +260,7 @@
             .complete .candidate-data-timer-bar
             {
                 background: var(--color-red);
-                animation: animate-pulse-bg 4s ease 1 forwards;
+                animation: animate-pulse-bg 4s ease 1;
             }
                 .complete .candidate-data-timer-bar-bg
                 {
@@ -350,7 +350,7 @@
                             overflow: hidden;
                             margin: 6px 0 0 0;
                             transition: all 0.5s ease;
-                            background: var(--color-white-2);
+                            background: var(--color-white);
                         }
                         .candidate-data-timer-bar-bg
                         {

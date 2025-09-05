@@ -102,6 +102,9 @@
 
         //  Create UI in DOM
             Crono.draw( data.id );
+
+        //  Sort candidates
+            Crono.order();
         });
 
     //  Event Set Overtime Single Clock
@@ -156,6 +159,9 @@
             //  Create UI in DOM
                 Crono.draw( candidate.id );
             });
+
+        //  Sort candidates
+            Crono.order();
         });
 
     });
